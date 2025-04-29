@@ -11,6 +11,11 @@ public class LogicaJugador : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Cursor.visible = false; // Ocultar el cursor del ratón
         Cursor.lockState = CursorLockMode.Confined; // Bloquear el cursor dentro de la ventana del juego
+
+
+        #if UNITY_EDITOR
+        Cursor.visible = true; // Mostrar el cursor en el editor
+        #endif
     }
 
 

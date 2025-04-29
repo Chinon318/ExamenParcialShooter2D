@@ -5,7 +5,7 @@ public class LogicaDisparo : MonoBehaviour
 {
     public GameObject bulletPrefab; // Prefab de la bala
     public GameObject[] bulletList;
-    private int bulletIndex = 0; // Índice de la bala actual
+    [SerializeField]private int bulletIndex = 0; // Índice de la bala actual
     [SerializeField]private int cargador = 10;
     public Transform firePoint; // Punto de disparo
     public float bulletSpeed = 20f; // Velocidad de la bala
@@ -27,6 +27,11 @@ public class LogicaDisparo : MonoBehaviour
     void Update()
     {
         Disparar();
+
+        if (Input.GetKeyDown(KeyCode.R)) // Si se presiona la tecla R, recargar
+        {
+            Recargar();
+        }
     }
 
     private void Disparar()
@@ -44,6 +49,15 @@ public class LogicaDisparo : MonoBehaviour
 
             StartCoroutine(DesactivarBala(tiempoEspera, bulletList[bulletIndex])); // Desactivar la bala después de 2 segundos
         }
+    }
+
+    private void Recargar()
+    {
+        for (int i = 0; i < cargador; i++)
+        {
+            bulletList[i].SetActive(false); // Desactivar todas las balas
+        }
+        bulletIndex = 0; // Reiniciar el índice de la bala
     }
 
 
