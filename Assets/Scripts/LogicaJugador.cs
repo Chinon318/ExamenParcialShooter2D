@@ -5,6 +5,8 @@ public class LogicaJugador : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]private float speed;
 
+    public float hp = 50f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,10 +20,21 @@ public class LogicaJugador : MonoBehaviour
         #endif
     }
 
+    void Update()
+    {
+        if (hp <= 0)
+        {
+            GameManager.Instance.playerScore += 0; 
+            GameManager.Instance.gameOver = true;
+        }
+    }
 
     void FixedUpdate()
     {
-        Movimiento();
+        if (!GameManager.Instance.gameOver)
+        {
+            Movimiento();
+        }
     }
 
     private void Movimiento()

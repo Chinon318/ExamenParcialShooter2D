@@ -14,6 +14,7 @@ public class LogicaEnemigos : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        target = GameObject.FindGameObjectWithTag("Player").transform; // Asigna el objetivo al jugador
     }
 
 
@@ -36,5 +37,13 @@ public class LogicaEnemigos : MonoBehaviour
     {
         Vector2 direction = target.position - transform.position;
         rb.MovePosition (rb.position + direction.normalized * speed * Time.fixedDeltaTime);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<LogicaJugador>().hp -= 10f;
+        }
     }
 }

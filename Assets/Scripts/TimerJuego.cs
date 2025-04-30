@@ -4,7 +4,7 @@ using UnityEngine;
 public class TimerJuego : MonoBehaviour
 {
     [SerializeField]private float timer = 60f;
-    public bool gameOver;
+    //public bool gameOver;
 
 
     public TMP_Text txt_Timer;
@@ -17,12 +17,12 @@ public class TimerJuego : MonoBehaviour
         if (timer <= 0)
         {
             timer = 0;
-            gameOver = true;
+            GameManager.Instance.gameOver = true; // Cambiar a la escena de Game Over o reiniciar el juego
             Debug.Log("¡Tiempo agotado!");
         }
         else
         {
-            gameOver = false;
+            GameManager.Instance.gameOver = false; // El juego no ha terminado
         }
 
         txt_Timer.text = timer.ToString("F0"); // Mostrar el tiempo restante en el UI

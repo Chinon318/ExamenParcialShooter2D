@@ -7,8 +7,10 @@ public class GameManager : MonoBehaviour
 
     public int playerScore {get; set; }
 
+    public bool gameOver {get; set; }
 
-    private TMP_Text txt_Score;
+
+    public TMP_Text txt_Score;
     void Awake()
     {
         if (Instance == null)
@@ -22,8 +24,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start() 
+    {
+        txt_Score = GameObject.Find("txt_Score").GetComponent<TMP_Text>();
+    }
+
     void Update()
     {
+        if (txt_Score == null)
+        {
+            txt_Score = GameObject.Find("txt_Score").GetComponent<TMP_Text>();
+        }
         txt_Score.text = playerScore.ToString();
     }
 }
